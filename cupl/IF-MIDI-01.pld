@@ -1,0 +1,59 @@
+
+/* ******* Memory management ************
+ * from 0000 to 7FFF belongs to ETHERNET
+ * from 8000 to 9FFF belongs to RAM ( 8k * 8 )
+ * from A000 to A003 belongs to LCD
+ * 
+ * The GAL is also used to miltiplex the RXD pin 
+ * from two different sources MIDI and RS232.
+ * by default ( at startup ) the control pin (p35)
+ * is high and lets RS232 through. To read from MIDI
+ * one must clear P35 to let MIDI in connect to RXD of the
+ * MCU.
+ */
+
+Name            IF-MIDI;
+Partno          01;
+Revision        A;
+Date            27.2.04;
+Designer        xaratustra;
+Company         ---;
+Location        Darmstadt;
+Assembly        None;
+Device          g16v8;
+
+/*
+ * inputs 
+ */
+
+pin 1 = P35;
+pin 2 = A11;
+pin 3 = A12;
+pin 4 = A13;
+pin 5 = A14;
+pin 6 = A15;
+pin 7 = RD;
+pin 8 = WR;
+pin 9 = MAX_RXD;
+pin 11 = MIDI_RXD;
+
+/*
+ * Outputs
+ */
+
+pin 12 = CS_ETH;
+pin 13 = CS_RAM;
+pin 14 = CS_LCD;
+pin 15 = RXD;
+
+/* boolean equations */
+
+CS_ETH = !A15 & (!RD # !WR);
+CS_RAM = A15 & !A14 & !A13 & (!RD # !WR);
+CS_LCD = A15 & !A14 & A13 & (!RD # !WR);
+
+/* The multiplexer */
+
+RXD = ( P35 & MAX_RXD ) # ( !P35 & MIDI_RXD );
+ 
+

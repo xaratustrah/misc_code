@@ -1,0 +1,15 @@
+#!/bin/sh
+# CHOWNMOD
+#
+echo Managing files in $1
+echo Changing ownership of files in $1 to user: $2 and group: $3 ...
+chown -R $2:$3 $1
+
+echo Making all directories readable/executable for everyone but writable only for the owner ...
+
+find $1 -type d -exec chmod 755 {} \;
+find $1 -type d -exec chmod 755 {} \;
+
+echo Making all files readable for everyone but writable only for the owner ...
+find $1 -type f -exec chmod 644 {} \;
+

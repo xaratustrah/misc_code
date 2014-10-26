@@ -1,0 +1,17 @@
+#!/bin/bash
+
+for i in $@
+do
+fullfile=$i
+filename=$(basename $fullfile)
+filename=${filename%.*}
+foldername=$(dirname $fullfile)
+extension=${filename##*.}
+ echo "Encoding file $filename"
+newfullfilename=$foldername/$filename.mp4
+ ffmpeg -y -i $i -acodec libfaac -ab 64k -ac 2 -vcodec libx264 -vpre veryfast -crf 20 $newfullfilename
+done
+
+echo
+echo "Done encoding, bye."
+echo

@@ -1,0 +1,38 @@
+%SIGNAL
+PIN   2 =  A11 
+PIN   3 =  A12 
+PIN   4 =  A13 
+PIN   5 =  A14 
+PIN   6 =  A15 
+PIN  12 =  CS_ETH 
+PIN  14 =  CS_LCD 
+PIN  13 =  CS_RAM 
+PIN   9 =  MAX_RXD 
+PIN  11 =  MIDI_RXD 
+PIN   1 =  P35 
+PIN   7 =  RD 
+PIN  15 =  RXD 
+PIN   8 =  WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CS_ETH =>
+    !A15 & !RD
+  # !A15 & !WR
+
+CS_LCD =>
+    A13 & !A14 & A15 & !RD
+  # A13 & !A14 & A15 & !WR
+
+CS_RAM =>
+    !A13 & !A14 & A15 & !RD
+  # !A13 & !A14 & A15 & !WR
+
+RXD =>
+    MAX_RXD & P35
+  # MIDI_RXD & !P35
+
+%END

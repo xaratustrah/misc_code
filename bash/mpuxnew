@@ -1,0 +1,2 @@
+#!/bin/bash
+for i in *.flv; do ffmpeg -i $i -f mp3 -vn -acodec copy `basename $i .flv`.mp3;done

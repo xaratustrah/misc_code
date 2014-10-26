@@ -1,0 +1,2 @@
+#!/bin/bash
+for i in *.avi; do mencoder $i -ovc xvid -oac mp3lame -xvidencopts bitrate=-1000 -o `basename $i .avi`_small.avi;done

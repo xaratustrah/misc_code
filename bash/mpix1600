@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# This script searches all the subdirectories for picture files 
+# and resizes these to 30% of their original size.
+#
+
+echo "Searching in current and all subdirectories for picture files (*.jpg) files ...";
+LIST=`find ./ -iname '*.[jJ][pP][gG]' | sed -e 's/\ /IHopeThisExpressionNeverOccursInAFileName/g'`;
+#it is 3:45 A.M. Sorry for this awful technique! 
+for d in $LIST; do
+    file=`echo $d | sed -e 's/IHopeThisExpressionNeverOccursInAFileName/\ /g'`;
+    convert -resize 1600 "$file" "${file%*.JPG}"
+done

@@ -1,0 +1,11 @@
+#!/bin/sh
+#/etc/NetworkManager/dispatcher.d/uhrzeitabgleich
+
+#Aktion einlesen
+ACTION=$2
+
+#ist das Netzwerk oben?
+if [ "$ACTION" = "up" ]; then
+    #Zeit vom NASA-Server holen
+    ntpdate ntp.nasa.gov
+fi

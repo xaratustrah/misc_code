@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# This script searches all the subdirectories for Flash Videos (e.g. YouTube) 
+# and extracts the MP3 Audio out of them.and saves them as an MP3 file near the original FLV.
+#
+
+echo "Searching in current and all subdirectories for (*.dv) files ...";
+LIST=`find ./ -iname '*.[dD][vV]' | sed -e 's/\ /IHopeThisExpressionNeverOccursInAFileName/g'`;
+#it is 3:45 A.M. Sorry for this awful technique! 
+for d in $LIST; do
+    file=`echo $d | sed -e 's/IHopeThisExpressionNeverOccursInAFileName/\ /g'`;
+    ffmpeg -sameq -deinterlace -i "$file" "${file%*.dv}.avi";
+done

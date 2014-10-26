@@ -1,0 +1,16 @@
+#!/bin/bash
+# This script renames files using their last modification time
+# xaratustra
+# 23 May 2010
+#
+
+fullfile=$(echo $1)
+filename=$(basename "$fullfile")
+foldername=$(dirname "$fullfile")
+ext=${filename##*.}
+extension=$(echo $ext | tr '[A-Z]' '[a-z]')
+var1=$(stat -c %y "$fullfile" | sed 's/\(.*\) \(.*\).\(.*\) \(.*\)/\1_\2/')
+var2=${var1%.*}
+newfullfilename=$foldername/$(echo $var2 | sed 's/:/h/' | sed 's/:/m/').$extension
+
+mv -v "$fullfile" "$newfullfilename"
