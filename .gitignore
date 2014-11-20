@@ -4,3 +4,9 @@ python/.ipynb_checkpoints
 *.pyc
 
 python/data.dat
+
+*.txt
+
+*.png
+
+*.pdf
