@@ -10,3 +10,7 @@ python/data.dat
 *.png
 
 *.pdf
+
+*.eps
+
+*.gif
