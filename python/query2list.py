@@ -21,7 +21,7 @@ def make_list(for_delete=False):
         count += 1
         line = line[0:index - count]
         full_path = re.split('^[0-9]+:', line)[1:]
-        # full_path[0] = full_path[0].replace(' ', '?')
+        full_path[0] = full_path[0].replace(' ', '?')
 
         flat_list.extend(full_path)
         separated_full_path = full_path[0].split('/')
