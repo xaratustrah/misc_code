@@ -9,7 +9,7 @@ import sys
 GSTORE = '/cvmfs/it.gsi.de/gstore/gstore64'
 
 
-def make_list(kind):
+def make_list(for_delete=False):
     data = sys.stdin.readlines()
     flatlist = []
     delete_list = []
@@ -30,7 +30,7 @@ def make_list(kind):
 
     flatlist.sort()
     delete_list.sort()
-    if kind == '-d':
+    if for_delete:
         out = delete_list
     else:
         out = flatlist
@@ -39,7 +39,12 @@ def make_list(kind):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        make_list()
     if len(sys.argv) == 2:
-        make_list(sys.argv[1])
-    else:
-        print('Wrong number of arguments!')
+        if (sys.argv[1] == '-d'):
+            make_list(True)
+        else:
+            print('No arguments for simple sorted list or -d for sorted delete list.')
+    if len(sys.argv) > 2:
+        print('No arguments for simple sorted list or -d for sorted delete list.')
