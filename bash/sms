@@ -1,0 +1,21 @@
+#!/bin/bash
+
+EXEC="curl"
+FROM="0123456789"
+USER="USERNAME"
+PASS="PASSWORD"
+TO=""
+
+if [ "$#" -ne 2 ]; then
+    echo "Wrong number of arguments."
+    exit 0
+fi
+if [ "$1" == "mama" ]; then
+    TO="0123456789"
+fi
+if [ "$TO" != "" ]; then
+    $EXEC "https://www.voipcheap.com/myaccount/sendsms.php?username=$USER&password=$PASS&from=$FROM&to=$TO&text=$2"
+else
+    echo "No such number! No such zone!"
+    exit 0
+fi
