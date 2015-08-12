@@ -2,6 +2,9 @@
 # sort query results from gStore or make a delete script
 #
 # Jan 2015 xaratustrah
+#
+# Please pipe the contents into the script
+#
 
 import re
 import sys
@@ -44,6 +47,6 @@ if __name__ == "__main__":
         if sys.argv[1] == '-d':
             make_list(True)
         else:
-            print('No arguments for simple sorted list or -d for sorted delete list.')
+            print('Pipe the output of gStore into the script. No arguments for simple sorted list or -d for sorted delete list.')
     if len(sys.argv) > 2:
-        print('No arguments for simple sorted list or -d for sorted delete list.')
+        print('Pipe the output of gStore into the script. No arguments for simple sorted list or -d for sorted delete list.')
