@@ -1,0 +1,8 @@
+#N canvas 83 311 450 300 10;
+#X obj 177 116 makenote 80 500;
+#X obj 175 168 noteout 1;
+#X msg 158 47 60;
+#X text 46 15 Test note out to piano;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 2 0 0 0;
