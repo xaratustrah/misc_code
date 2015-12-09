@@ -16,7 +16,10 @@ from bs4 import BeautifulSoup
 import urllib.request as ur
 
 
-def download_file(url, folder, name):
+def download_file(url, folder, name, download=True):
+    if not download:
+        print('{}./{}/{}.mp4'.format(url, folder, name))
+        return
     g = ur.urlopen(url)
     with open('./{}/{}.mp4'.format(folder, name), 'b+w') as f:
         f.write(g.read())
@@ -36,5 +39,5 @@ if __name__ == '__main__':
                 if tag['href'].endswith('.mp4'):
                     file_url = (tag['href'])
                     print('--> movie_{}.mp4'.format(cnt))
-                    download_file(file_url, '.', 'movie_{}'.format(cnt))
+                    download_file(file_url, '.', 'movie_{}'.format(cnt), download=False)
                     cnt += 1
