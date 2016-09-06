@@ -34,10 +34,10 @@ if __name__ == '__main__':
         if urls:
             print('Downloading from: ' + urls[0])
             page = ur.urlopen(urls[0])
-            soup = BeautifulSoup(page)
+            soup = BeautifulSoup(page, 'html.parser')
             for tag in soup.findAll('a', href=True):
                 if tag['href'].endswith('.mp4'):
                     file_url = (tag['href'])
                     print('--> movie_{}.mp4'.format(cnt))
-                    download_file(file_url, '.', 'movie_{}'.format(cnt), download=False)
+                    download_file(file_url, '.', 'movie_{}'.format(cnt), download=True)
                     cnt += 1
