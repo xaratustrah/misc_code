@@ -5,6 +5,20 @@ CGI Plot example with bokeh
 Xaratustrah
 2016
 
+you can run a server by:
+
+    python3 -m http.server --bind localhost --cgi 8000
+
+remember that the CGI must be in a directory called `/cgi-bin`. This is relative
+to where you have started the server, which becomes the new `/` even if you
+have started the server in `/home/user`
+
+Then you can call the script like this in a browser:
+
+    http://localhost:8000/cgi-bin/bokeh_cgi_example.py
+
+good luck!
+
 """
 
 import numpy as np
