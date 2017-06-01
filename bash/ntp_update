@@ -1,0 +1,10 @@
+#!/bin/bash
+LOG="/tmp/ntpupdater.log"
+# update with ntp server
+echo >> $LOG
+echo "-------------------------" >> $LOG
+echo "Date before sync:" >> $LOG
+date >> $LOG
+/usr/sbin/service ntp stop
+/usr/sbin/ntpd -gq >> $LOG
+/usr/sbin/service ntp start
