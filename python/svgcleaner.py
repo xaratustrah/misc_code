@@ -6,7 +6,7 @@ Cleanup PDF / SVG
 
 First install **pdf2svg** (from https://github.com/dawbarton/pdf2svg):
 
-pdf2svg input.pdf input_%d.svg all
+pdf2svg input.pdf input_%04d.svg all
 python svgcleaner.py *.svg
 
 
@@ -44,13 +44,13 @@ def main(filename):
     lst = []
 
     # find the id of the elements to be deleted
+
     def has_xlink(tag):
         return tag.has_attr('xlink:href')
     for tag in soup.findAll(has_xlink):
         if 'image' not in tag['xlink:href']:
             lst.append(tag['xlink:href'].strip('#'))
             tag.decompose()
-
     for tag in soup.findAll('image'):  # , {"height": "41"}):
         if 'jpeg' in tag['xlink:href']:
             lst.append(tag['id'])
@@ -61,6 +61,13 @@ def main(filename):
     for tag in soup.findAll(has_id):
         tag.decompose()
 
+    # the ones with opaque watermark
+    def has_opacity(tag):
+        return tag.has_attr('style') and 'opacity:0.' in tag['style']
+    for tag in soup.findAll(has_opacity):
+        tag.decompose()
+
+    # Writing back to file
     with open("{}.svg".format(filename), "w") as file:
         file.write(soup.prettify())
 
@@ -79,8 +86,8 @@ if __name__ == '__main__':
 
 """
 # old code
-#pipe SVG file into this script:
-#cat input.svg | ./svgcleaner.py > output.svg
+# pipe SVG file into this script:
+# cat input.svg | ./svgcleaner.py > output.svg
 
 import sys
 
